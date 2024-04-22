@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include "param.h"
+using namespace param;
+void unarchiving() 
+{
+    std::string unarch = "";
+    for (int i = 0; i < param::positions.size();i++) {
+        if (positions[i] == 100)
+        {
+            unarch += "1";
+        }
+        else
+        {
+            unarch += param::cell;
+        }
+    }
+    std::cout << unarch << std::endl;
+}
+void archiving() {
+    std::string text = "111010110101010";
+    for (int i = 0; i < text.length() - 1;) {
+        std::cout << "i = " << i << std::endl;
+        std::string tmp_sym = std::to_string(text[i] - 48) + std::to_string(text[i + 1] - 48)+ 
+            std::to_string(text[i + 2] - 48) + std::to_string(text[i + 3] - 48);
+        std::cout << tmp_sym << std::endl;
+
+        if (tmp_sym == cell) {
+            num_position = i;
+            positions.push_back(num_position);
+            i += batch;
+        }
+        else {
+            positions.push_back(100);
+            i++;
+        }
+    }
+    for (int i : positions) {
+        std::cout << i << ' ';
+    }
+    std::cout << std::endl;
+}
+int main() {
+    archiving();
+    unarchiving();
+    return 0;
+}
+
+
+
