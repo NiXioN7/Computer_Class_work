@@ -1,0 +1,49 @@
+#include <iostream>
+#include <string>
+using namespace std;
+void start_func(string str, int(*func_0)(string), int a, int b, int c,int d, string(*func_1)(int a, int b, int c,int d))
+{
+    cout << "Результат первой функции = " << func_0(str) << " / Результат второй функции = " << func_1(a,b,c,d) << endl;
+}
+auto func_0 = [](string str)
+{
+        int ind_count = 0;
+        for (int i = 0; i < size(str); i++)
+        {
+            ind_count += int(char(str[i]));
+        }
+        return ind_count;
+};
+auto func_1 = [](int a, int b, int c, int d)
+{
+    int arr[4]{ a,b,c,d };
+    string str;
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            if (arr[j] > arr[i])
+            {
+                int tmp_num = arr[j];
+                arr[j] = arr[i];
+                arr[i] = tmp_num;
+            }
+        }
+        
+    }
+    for (int i = 0; i < 4; i++)
+    {
+        str += to_string(arr[i]);
+        str += " ";
+    }
+    return str;
+};
+void ss(string str, int(*func_0)(string), int a, int b, int c, int d, string(*func_1)(int a, int b, int c, int d))
+{
+    start_func(str, func_0, a, b, c, d, func_1);
+}
+int main()
+{
+    setlocale(0, "ru");
+    ss("12345", func_0, 2,67,34,12, func_1);
+}
